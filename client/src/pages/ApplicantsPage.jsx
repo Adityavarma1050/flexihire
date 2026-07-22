@@ -68,24 +68,40 @@ export default function ApplicantsPage() {
                   </div>
                 </div>
 
-                {/* Status selector */}
-                <div className="flex items-center space-x-2">
-                  <span className="text-xs font-extrabold text-slate-400 uppercase tracking-wider">Status:</span>
-                  <select
-                    value={app.status}
-                    onChange={(e) => handleStatusChange(app.id, e.target.value)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold border focus:outline-none cursor-pointer ${
-                      app.status === 'Accepted'
-                        ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
-                        : app.status === 'Rejected'
-                        ? 'bg-rose-50 text-rose-800 border-rose-300'
-                        : 'bg-amber-50 text-amber-800 border-amber-300'
+                {/* Status selector buttons */}
+                <div className="flex items-center space-x-1.5 bg-slate-100 p-1 rounded-2xl border border-slate-200/80 shrink-0">
+                  <button
+                    onClick={() => handleStatusChange(app.id, 'Pending')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 ${
+                      app.status === 'Pending'
+                        ? 'bg-amber-500 text-white shadow-sm'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
                     }`}
                   >
-                    <option value="Pending">Under Review</option>
-                    <option value="Accepted">Accept Candidate</option>
-                    <option value="Rejected">Reject Candidate</option>
-                  </select>
+                    Review Later
+                  </button>
+
+                  <button
+                    onClick={() => handleStatusChange(app.id, 'Accepted')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 ${
+                      app.status === 'Accepted'
+                        ? 'bg-emerald-600 text-white shadow-sm'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                    }`}
+                  >
+                    Accept
+                  </button>
+
+                  <button
+                    onClick={() => handleStatusChange(app.id, 'Rejected')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 ${
+                      app.status === 'Rejected'
+                        ? 'bg-rose-600 text-white shadow-sm'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                    }`}
+                  >
+                    Reject
+                  </button>
                 </div>
               </div>
 

@@ -68,40 +68,41 @@ export default function ApplicantsPage() {
                   </div>
                 </div>
 
-                {/* Status selector buttons */}
-                <div className="flex items-center space-x-1.5 bg-slate-100 p-1 rounded-2xl border border-slate-200/80 shrink-0">
-                  <button
-                    onClick={() => handleStatusChange(app.id, 'Pending')}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 ${
-                      app.status === 'Pending'
-                        ? 'bg-amber-500 text-white shadow-sm'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
-                    }`}
-                  >
-                    Review Later
-                  </button>
+                {/* Status selector buttons (locked if already accepted/rejected) */}
+                <div className="shrink-0">
+                  {app.status === 'Accepted' && (
+                    <span className="inline-flex items-center space-x-1.5 px-4 py-2 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-2xl text-xs font-black shadow-sm">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      <span>Application Accepted</span>
+                    </span>
+                  )}
+                  {app.status === 'Rejected' && (
+                    <span className="inline-flex items-center space-x-1.5 px-4 py-2 bg-rose-100 text-rose-800 border border-rose-300 rounded-2xl text-xs font-black shadow-sm">
+                      <XCircle className="w-4 h-4 text-rose-600" />
+                      <span>Application Rejected</span>
+                    </span>
+                  )}
+                  {app.status === 'Pending' && (
+                    <div className="flex items-center space-x-1.5 bg-slate-100 p-1 rounded-2xl border border-slate-200/80">
+                      <span className="px-2.5 py-1 text-[10px] text-amber-800 font-extrabold uppercase bg-amber-100 rounded-lg border border-amber-200">
+                        Under Review
+                      </span>
 
-                  <button
-                    onClick={() => handleStatusChange(app.id, 'Accepted')}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 ${
-                      app.status === 'Accepted'
-                        ? 'bg-emerald-600 text-white shadow-sm'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
-                    }`}
-                  >
-                    Accept
-                  </button>
+                      <button
+                        onClick={() => handleStatusChange(app.id, 'Accepted')}
+                        className="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 border border-slate-200 shadow-sm"
+                      >
+                        Accept
+                      </button>
 
-                  <button
-                    onClick={() => handleStatusChange(app.id, 'Rejected')}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 ${
-                      app.status === 'Rejected'
-                        ? 'bg-rose-600 text-white shadow-sm'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
-                    }`}
-                  >
-                    Reject
-                  </button>
+                      <button
+                        onClick={() => handleStatusChange(app.id, 'Rejected')}
+                        className="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-white hover:bg-rose-50 text-slate-700 hover:text-rose-700 border border-slate-200 shadow-sm"
+                      >
+                        Reject
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 
